@@ -8,7 +8,6 @@ import scraperwiki
 import urllib2
 from datetime import datetime
 from bs4 import BeautifulSoup
-import requests
 
 
 #### FUNCTIONS 1.0
@@ -52,7 +51,7 @@ def validateURL(url):
         else:
             ext = os.path.splitext(url)[1]
         validURL = r.getcode() == 200
-        validFiletype = ext in ['.csv', '.xls', '.xlsx']
+        validFiletype = ext.lower() in ['.csv', '.xls', '.xlsx']
         return validURL, validFiletype
     except:
         print ("Error validating URL.")
@@ -92,7 +91,7 @@ errors = 0
 data = []
 
 
-#### READ HTML 1.1 - no "lxml"
+#### READ HTML 1.0
 
 html = urllib2.urlopen(url)
 soup = BeautifulSoup(html, 'lxml')
